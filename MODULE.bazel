@@ -1,0 +1,15 @@
+module(
+    name = "bazel-mods-demo",
+    version = "0.0.1",
+)
+
+bazel_dep(name = "rules_python", version = "0.35.0")
+
+# Depend on module lib_a at a local path.
+# The bazel_dep statement is necessary because the root module must have visibility on lib_a.
+# source: https://github.com/bazelbuild/examples/blob/main/bzlmod/02-override_bazel_module/MODULE.bazel
+bazel_dep(name = "demo", version = "")
+local_path_override(
+    module_name = "demo",
+    path = "../bazel-python-demo-pkgs",
+)
